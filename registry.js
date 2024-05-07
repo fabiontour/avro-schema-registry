@@ -27,7 +27,7 @@ function schemas(registryUrl, auth = null, agent = null) {
   }
 
   if(agent != null && (typeof agent === 'object')) {
-    registry.certificateAuthority = agent.certificateAuthority;
+    registry.httpsAgent = agent;
   }
 
   const encodeFunction = (msg, schemaId, schema) => {
