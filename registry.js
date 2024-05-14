@@ -9,7 +9,7 @@ const avsc = require('avsc');
 const SchemaCache = require('./lib/schema-cache');
 const {pushSchema, getSchemaById, getLatestVersionForSubject} = require('./lib/http-calls');
 
-function schemas(registryUrl, auth = null, agent = null) {
+function schemas(registryUrl, auth = null, ca = null) {
   const parsed = new URL(registryUrl);
   const registry = {
     cache: new SchemaCache(),
@@ -26,8 +26,8 @@ function schemas(registryUrl, auth = null, agent = null) {
     registry.password = auth.password;
   }
 
-  if(agent != null && (typeof agent === 'object')) {
-    registry.httpsAgent = agent;
+  if(ca != null && (typeof ca === 'object')) {
+    registry.ca = ca;
   }
 
   const encodeFunction = (msg, schemaId, schema) => {
